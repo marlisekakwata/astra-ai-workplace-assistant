@@ -96,6 +96,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Workplace AI — Productivity Assistant" },
+      { name: "description", content: "WorkWise AI is a web-based productivity platform that automates workplace tasks using AI." },
+      { property: "og:description", content: "WorkWise AI is a web-based productivity platform that automates workplace tasks using AI." },
+      { name: "twitter:description", content: "WorkWise AI is a web-based productivity platform that automates workplace tasks using AI." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18c25e0a-35df-497b-8c9f-6be32f1c26cb/id-preview-9fc4be7a--c8c782ed-8842-4b1f-a27e-1c0870f6fb3b.lovable.app-1781698227431.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18c25e0a-35df-497b-8c9f-6be32f1c26cb/id-preview-9fc4be7a--c8c782ed-8842-4b1f-a27e-1c0870f6fb3b.lovable.app-1781698227431.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
