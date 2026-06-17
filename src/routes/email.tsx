@@ -59,13 +59,17 @@ function EmailPage() {
     onError: (err: Error) => toast.error(err.message),
   });
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const runGenerate = () => {
     if (!recipient.trim() || !subject.trim() || !purpose.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
     m.mutate({ data: { recipient, subject, purpose, tone } });
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    runGenerate();
   };
 
   return (
@@ -140,8 +144,10 @@ function EmailPage() {
           {result ? (
             <OutputCard
               title="Generated email"
-              pdfTitle={result.subject}
               textForCopy={`Subject: ${result.subject}\n\n${result.body}`}
+              onRegenerate={runGenerate}
+              isRegenerating={m.isPending}
+              onDelete={() => setResult(null)}
             >
               <p className="font-medium text-foreground">Subject: {result.subject}</p>
               <div className="mt-3 whitespace-pre-wrap">{result.body}</div>

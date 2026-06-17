@@ -52,13 +52,17 @@ function MeetingsPage() {
     onError: (err: Error) => toast.error(err.message),
   });
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const runSummarize = () => {
     if (notes.trim().length < 10) {
       toast.error("Please paste your meeting notes");
       return;
     }
     m.mutate({ data: { notes } });
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    runSummarize();
   };
 
   const exportText = result
@@ -102,7 +106,13 @@ function MeetingsPage() {
 
         <div>
           {result ? (
-            <OutputCard title="Meeting summary" textForCopy={exportText}>
+            <OutputCard
+              title="Meeting summary"
+              textForCopy={exportText}
+              onRegenerate={runSummarize}
+              isRegenerating={m.isPending}
+              onDelete={() => setResult(null)}
+            >
               <Section title="Executive Summary">
                 <p>{result.summary}</p>
               </Section>
