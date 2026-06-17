@@ -44,8 +44,8 @@ const features = [
     color: "from-cyan-500/15 to-cyan-500/0 text-cyan-600 dark:text-cyan-400",
   },
   {
-    title: "AI Chatbot",
-    description: "Ask anything about workplace productivity and get instant guidance.",
+    title: "Astra",
+    description: "Ask Astra anything about workplace productivity and get instant guidance.",
     icon: Bot,
     url: "/chatbot" as const,
     color: "from-violet-500/15 to-violet-500/0 text-violet-600 dark:text-violet-400",
@@ -89,7 +89,7 @@ function Dashboard() {
       icon: NotebookPen,
     },
     {
-      label: "Chat sessions",
+      label: "Astra chats",
       value: history.filter((h) => h.tool === "chat").length,
       icon: Bot,
     },
@@ -121,7 +121,7 @@ function Dashboard() {
               to="/chatbot"
               className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition hover:bg-accent/30"
             >
-              Open chatbot
+              Chat with Astra
             </Link>
           </div>
         </div>
