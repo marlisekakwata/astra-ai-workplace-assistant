@@ -1,18 +1,26 @@
-import { Copy, Check, FileDown } from "lucide-react";
+import { Copy, Check, RefreshCw, Trash2, Loader2 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
-import { exportTextAsPdf } from "@/lib/export-pdf";
 
 type Props = {
   title: string;
   textForCopy: string;
-  pdfTitle?: string;
+  onRegenerate?: () => void;
+  onDelete?: () => void;
+  isRegenerating?: boolean;
   children: ReactNode;
 };
 
-export function OutputCard({ title, textForCopy, pdfTitle, children }: Props) {
+export function OutputCard({
+  title,
+  textForCopy,
+  onRegenerate,
+  onDelete,
+  isRegenerating,
+  children,
+}: Props) {
   const [copied, setCopied] = useState(false);
 
   const onCopy = async () => {
@@ -35,14 +43,22 @@ export function OutputCard({ title, textForCopy, pdfTitle, children }: Props) {
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             <span className="ml-1.5">Copy</span>
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => exportTextAsPdf(pdfTitle ?? title, textForCopy)}
-          >
-            <FileDown className="h-3.5 w-3.5" />
-            <span className="ml-1.5">PDF</span>
-          </Button>
+          {onRegenerate && (
+            <Button variant="outline" size="sm" onClick={onRegenerate} disabled={isRegenerating}>
+              {isRegenerating ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <RefreshCw className="h-3.5 w-3.5" />
+              )}
+              <span className="ml-1.5">Regenerate</span>
+            </Button>
+          )}
+          {onDelete && (
+            <Button variant="outline" size="sm" onClick={onDelete}>
+              <Trash2 className="h-3.5 w-3.5" />
+              <span className="ml-1.5">Delete</span>
+            </Button>
+          )}
         </div>
       </div>
       <div className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">{children}</div>
