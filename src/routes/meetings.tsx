@@ -36,12 +36,14 @@ type Result = {
 function MeetingsPage() {
   const [notes, setNotes] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [editedText, setEditedText] = useState<string | null>(null);
 
   const summarize = useServerFn(summarizeMeeting);
   const m = useMutation({
     mutationFn: summarize,
     onSuccess: (data) => {
       setResult(data);
+      setEditedText(null);
       addHistory({
         tool: "meeting",
         title: data.summary.slice(0, 60),
