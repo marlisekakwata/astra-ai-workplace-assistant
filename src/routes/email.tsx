@@ -148,6 +148,14 @@ function EmailPage() {
               onRegenerate={runGenerate}
               isRegenerating={m.isPending}
               onDelete={() => setResult(null)}
+              onEdit={(next) => {
+                const match = next.match(/^Subject:\s*(.*?)\n\n([\s\S]*)$/);
+                if (match) {
+                  setResult({ subject: match[1].trim(), body: match[2] });
+                } else {
+                  setResult({ subject: result.subject, body: next });
+                }
+              }}
             >
               <p className="font-medium text-foreground">Subject: {result.subject}</p>
               <div className="mt-3 whitespace-pre-wrap">{result.body}</div>

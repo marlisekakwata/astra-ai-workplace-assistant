@@ -36,12 +36,14 @@ type Result = {
 function MeetingsPage() {
   const [notes, setNotes] = useState("");
   const [result, setResult] = useState<Result | null>(null);
+  const [editedText, setEditedText] = useState<string | null>(null);
 
   const summarize = useServerFn(summarizeMeeting);
   const m = useMutation({
     mutationFn: summarize,
     onSuccess: (data) => {
       setResult(data);
+      setEditedText(null);
       addHistory({
         tool: "meeting",
         title: data.summary.slice(0, 60),
@@ -108,23 +110,33 @@ function MeetingsPage() {
           {result ? (
             <OutputCard
               title="Meeting summary"
-              textForCopy={exportText}
+              textForCopy={editedText ?? exportText}
               onRegenerate={runSummarize}
               isRegenerating={m.isPending}
-              onDelete={() => setResult(null)}
+              onDelete={() => {
+                setResult(null);
+                setEditedText(null);
+              }}
+              onEdit={(next) => setEditedText(next)}
             >
-              <Section title="Executive Summary">
-                <p>{result.summary}</p>
-              </Section>
-              <Section title="Key Decisions">
-                <ItemList items={result.decisions} empty="No decisions captured." />
-              </Section>
-              <Section title="Action Items">
-                <ItemList items={result.actionItems} empty="No action items." />
-              </Section>
-              <Section title="Deadlines">
-                <ItemList items={result.deadlines} empty="No deadlines mentioned." />
-              </Section>
+              {editedText ? (
+                <div className="whitespace-pre-wrap">{editedText}</div>
+              ) : (
+                <>
+                  <Section title="Executive Summary">
+                    <p>{result.summary}</p>
+                  </Section>
+                  <Section title="Key Decisions">
+                    <ItemList items={result.decisions} empty="No decisions captured." />
+                  </Section>
+                  <Section title="Action Items">
+                    <ItemList items={result.actionItems} empty="No action items." />
+                  </Section>
+                  <Section title="Deadlines">
+                    <ItemList items={result.deadlines} empty="No deadlines mentioned." />
+                  </Section>
+                </>
+              )}
             </OutputCard>
           ) : (
             <Card className="flex h-full min-h-[300px] items-center justify-center p-8 text-center">
