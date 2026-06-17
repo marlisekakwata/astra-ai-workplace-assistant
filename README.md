@@ -1,0 +1,1 @@
+AI Workplace Productivity Assistant is a modern AI-powered web application that helps professionals automate workplace tasks through intelligent email generation, meeting note summarisation, task planning, research assistance, and an interactive AI chatbot. The platform provides a responsive SaaS-style dashboard while promoting responsible and ethical use of AI technologies.
