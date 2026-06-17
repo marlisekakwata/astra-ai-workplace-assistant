@@ -28,7 +28,7 @@ const tools = [
   { title: "Meeting Summaries", url: "/meetings", icon: NotebookPen },
   { title: "Task Planner", url: "/tasks", icon: CalendarCheck },
   { title: "Research Assistant", url: "/research", icon: Search },
-  { title: "AI Chatbot", url: "/chatbot", icon: Bot },
+  { title: "Astra", url: "/chatbot", icon: Bot },
 ] as const;
 
 export function AppSidebar() {

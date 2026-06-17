@@ -14,8 +14,8 @@ import { addHistory } from "@/lib/history";
 export const Route = createFileRoute("/chatbot")({
   head: () => ({
     meta: [
-      { title: "AI Chatbot — Workplace AI" },
-      { name: "description", content: "Chat with an AI workplace assistant for instant guidance." },
+      { title: "Astra — Workplace AI" },
+      { name: "description", content: "Chat with Astra for instant workplace guidance." },
     ],
   }),
   component: ChatbotPage,
@@ -72,8 +72,8 @@ function ChatbotPage() {
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-8 sm:px-6 lg:px-8">
       <PageHeader
-        title="AI Workplace Chatbot"
-        description="Ask anything about productivity, communication, planning, or workplace problems."
+        title="Astra"
+        description="Ask Astra anything about productivity, communication, planning, or workplace problems."
         icon={Bot}
       />
 
@@ -123,7 +123,7 @@ function ChatbotPage() {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask the workplace assistant…"
+              placeholder="Ask Astra…"
               disabled={isLoading}
               maxLength={2000}
             />
